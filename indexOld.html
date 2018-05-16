@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculadora</title>
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<style type="text/css" href="w3.css"></style>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+	<div class="w3-row">
+  		<div class="w3-col s4  w3-center">  			
+  		</div>
+  		<div class="w3-col s4  w3-center">
+  			<div class="w3-row">
+		  		<div class="w3-col s6 w3-center">
+		  			<label>Cantidad: </label>
+		  			<br>
+		  			<label>Precio de compra: </label>
+		  			<br>
+		  			<br>		  			
+		  			<label>Comision: </label>
+		  			<br>
+		  			<label>Precio de venta: </label>
+		  		</div>
+		  		<div class="w3-col s6 w3-center">
+		  			<input id="cantidad" type="text" maxlength="10" name="cantidad" placeholder="Cantidad de monedas:"/>
+		  			<input id="precio" type="text" maxlength="10" name="precio" placeholder="precio de compra en btc:"/>
+		  			<input id="comision" type="text" maxlength="10" name="comision" placeholder="comision de monedas:"/>
+		  			<input id="venta" type="text" maxlength="10" name="venta" placeholder="Precio de venta en btc"/>
+		  		</div>
+			</div>
+  		</div>
+  		<div class="w3-col s4  w3-center">		
+  		</div>
+	</div>
+	<br>
+	<label>Total de compra: </label><label id="compra">0.00000000</label>
+	<br>
+	<label>Total de venta: </label><label id="totalVenta">0.00000000</label>
+	<br>
+	<label>Porcentaje de ganancia: </label><label id="ganancia">0.0 %</label>
+	<br> 
+	<input onclick="calcular()" type="submit" name="" value="calcular">
+	<h1>Se parte del supuesto que la comision es en la misma moneda que se esta vendiendo</h1>
+
+	<script type="text/javascript">
+		function calcular() {
+			var cantidad = $('#cantidad').val();
+			var precio = $('#precio').val();
+			var comision = $('#comision').val();
+			var venta = $('#venta').val();
+			
+			
+			var compra = cantidad * precio;
+			$('#compra').text(compra.toFixed(8));
+
+			cantidad = cantidad - comision;
+
+			var totalVenta = venta * cantidad;
+
+			$('#totalVenta').text(totalVenta.toFixed(8));
+
+			
+			var ganancia = totalVenta - compra;
+
+			var porcentaje = (ganancia * 100) / compra;
+
+			$('#ganancia').text(porcentaje.toFixed(8)+" %");
+
+			
+			
+		}		
+	</script>
+</body>
+</html>
