@@ -71,12 +71,13 @@ body {font-family: Arial;}
                                
                                     <div class="form-group">
                                         <label >Cantidad: </label>
-                                        <input class="form-control" id="cantidad" type="number" maxlength="10" name="cantidad" placeholder="Cantidad de monedas:">
+                                        <input class="form-control" id="cantidad" type="text" maxlength="10" name="cantidad" placeholder="Cantidad de monedas:">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Precio de compra : </label>
-                                        <input class="form-control" id="precio" type="number" maxlength="10" name="precio" placeholder="precio de compra en btc:" required="">
+                                        <input class="form-control" id="precio" type="text  " maxlength="10" name="precio" placeholder="precio de compra en btc:" required="">
                                     </div>
+                            
                                 
                                  <hr style="border-color:red;" style="border:2px;">
                  
@@ -169,12 +170,38 @@ body {font-family: Arial;}
 		var desc = 0.001;
 
 		$(document).ready(function(){
-			$( "#var" ).load( "var1.html" );
+			//$( "#var" ).load( "var1.html" );
     		$('#cantidad').keyup(function() {  	
-    			$("#porc").val(($('#cantidad').val() * desc).toFixed(0));	
+                var c = $('#cantidad').val();
+    			$("#porc").val((c  * desc).toFixed(8));	
 				$("#real").val(($('#cantidad').val() - $('#porc').val()).toFixed(8));		
 			});
+
+            $("#precio").on('keyup', function (e) {
+                if (e.keyCode == 13) {
+                    llenar();
+                }
+            });
+
+           
 		});
+
+        function llenar(){
+            var c = $('#precio').val();
+                var len = c.length;                     
+                    if(len < 10){
+                        var resto = 10 - len;                         
+                        var cero = '0.'; 
+                            while(resto > 2){               
+                                cero += '0';
+                                resto--;                       
+                            }                          
+                        cero += c;    
+                        $('#precio').val(cero);                                             
+                    }    
+                   
+        }
+                       
 
 		function calcular() {
 			var cantidad = $('#cantidad').val();
@@ -221,38 +248,38 @@ body {font-family: Arial;}
 	
 			var compra = cantidad * precio;
 
-			$('#compra2').text(compra.toFixed(0));
+			$('#compra2').text(compra.toFixed(8));
 
 /////////////////////////////////////////////////////////////////////////////////////////
 			var esperanza = compra * porcGanancia;
 
 			var x = (compra + esperanza)/real;
 
-			$('#precioSugerido').text(x.toFixed(0));
+			$('#precioSugerido').text(x.toFixed(8));
                         
                         
                         var totalVenta = x * real;
 
-			$('#totalVenta2').text(totalVenta.toFixed(0));
+			$('#totalVenta2').text(totalVenta.toFixed(8));
                         
                         var ganancia = totalVenta - compra;
 			
-			$('#diferencia2').text(ganancia.toFixed(0));	
+			$('#diferencia2').text(ganancia.toFixed(8));	
                         
  ///////////////////////////////////////////////////////////////////////////////////////                       
 			var esperanza2 = compra * porcGanancia2;
 
 			var x2 = (compra + esperanza2)/real;
 
-			$('#precioSugerido2').text(x2.toFixed(0));
+			$('#precioSugerido2').text(x2.toFixed(8));
                         
                         var totalVenta2 = x2 * real;
 
-			$('#totalVenta22').text(totalVenta2.toFixed(0));
+			$('#totalVenta22').text(totalVenta2.toFixed(8));
                         
                         var ganancia22 = totalVenta2 - compra;
 			
-			$('#diferencia22').text(ganancia22.toFixed(0));	
+			$('#diferencia22').text(ganancia22.toFixed(8));	
                         
                         
 ///////////////////////////////////////////////////////////////////////////////////                        
@@ -260,17 +287,17 @@ body {font-family: Arial;}
 
 			var x3 = (compra + esperanza3)/real;
 
-			$('#precioSugerido3').text(x3.toFixed(0));
+			$('#precioSugerido3').text(x3.toFixed(8));
                         
                         var totalVenta3 = x3 * real;
 
-			$('#totalVenta23').text(totalVenta3.toFixed(0));
+			$('#totalVenta23').text(totalVenta3.toFixed(8));
 
 			
 			
 			var ganancia3 = totalVenta3 - compra;
 			
-			$('#diferencia23').text(ganancia3.toFixed(0));		
+			$('#diferencia23').text(ganancia3.toFixed(8));		
 			
 		}		
 	</script>
